@@ -1,9 +1,9 @@
 # ocp-keda-redis
 Installation
 - keda helm
-    helm repo add kedacore https://kedacore.github.io/charts
-    helm repo update
-    helm install keda kedacore/keda --namespace keda --create-namespace
+    - helm repo add kedacore https://kedacore.github.io/charts
+    - helm repo update
+    - helm install keda kedacore/keda --namespace keda --create-namespace
 - add scc --> oc apply -f redis-enterprise-scc-v2.yaml
 - Redis enterprise, 3 worker nodes by default
     - Operator (certifed)

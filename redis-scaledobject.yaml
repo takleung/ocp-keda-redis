@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: redis-scaledobject
+  namespace: keda
+spec:
+  cooldownPeriod: 30
+  maxReplicaCount: 100
+  minReplicaCount: 0
+  pollingInterval: 10
+  scaleTargetRef:
+    name: redis-consumer
+  triggers:
+    - authenticationRef:
+        name: keda-trigger-auth-redis-secret
+      metadata:
+        address: '10.130.0.24:17750'
+        listLength: '5'
+        listName: mylist
+      type: redis

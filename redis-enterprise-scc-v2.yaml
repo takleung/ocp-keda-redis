@@ -1,0 +1,71 @@
+allowHostPorts: false
+priority: null
+requiredDropCapabilities: null
+allowPrivilegedContainer: false
+runAsUser:
+  type: MustRunAs
+  uid: 1001
+users: []
+allowHostDirVolumePlugin: false
+seccompProfiles:
+  - runtime/default
+allowHostIPC: false
+seLinuxContext:
+  type: MustRunAs
+readOnlyRootFilesystem: false
+metadata:
+  annotations:
+    kubernetes.io/description: >-
+      redis-enterprise-scc is the minimal SCC needed to run Redis Enterprise
+      nodes on Kubernetes. It provides the same features as restricted-v2 SCC,
+      but allows pods to enable the SYS_RESOURCE capability, which is required
+      by Redis Enterprise nodes to manage file descriptor limits and OOM scores
+      for database shards. Additionally, it requires pods to run as UID/GID
+      1001, which are the UID/GID used within the Redis Enterprise node
+      containers.
+  name: redis-enterprise-scc-v2
+fsGroup:
+  ranges:
+    - max: 1001
+      min: 1001
+  type: MustRunAs
+groups: []
+kind: SecurityContextConstraints
+defaultAddCapabilities: null
+supplementalGroups:
+  type: RunAsAny
+volumes:
+  - awsElasticBlockStore
+  - azureDisk
+  - azureFile
+  - cephFS
+  - cinder
+  - configMap
+  - csi
+  - downwardAPI
+  - emptyDir
+  - ephemeral
+  - fc
+  - flexVolume
+  - flocker
+  - gcePersistentDisk
+  - gitRepo
+  - glusterfs
+  - iscsi
+  - nfs
+  - persistentVolumeClaim
+  - photonPersistentDisk
+  - portworxVolume
+  - projected
+  - quobyte
+  - rbd
+  - scaleIO
+  - secret
+  - storageOS
+  - vsphere
+allowHostPID: false
+allowHostNetwork: false
+allowPrivilegeEscalation: false
+apiVersion: security.openshift.io/v1
+allowedCapabilities:
+  - SYS_RESOURCE

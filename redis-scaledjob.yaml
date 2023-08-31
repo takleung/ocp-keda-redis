@@ -1,0 +1,43 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledJob
+metadata:
+  name: redis-scaledjob
+  namespace: keda
+spec:
+  failedJobsHistoryLimit: 5
+  jobTargetRef:
+    template:
+      metadata:
+        creationTimestamp: null
+      spec:
+        containers:
+          - env:
+              - name: REDIS_HOST
+                value: 10.130.0.24
+              - name: REDIS_PORT
+                value: '17750'
+              - name: REDIS_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: REDIS_PASSWORD
+                    name: redis-password
+            image: takleung/redis-counter
+            name: redis-counter
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            resources: {}
+        restartPolicy: Never
+  maxReplicaCount: 30
+  pollingInterval: 30
+  rollout: {}
+  scalingStrategy: {}
+  successfulJobsHistoryLimit: 5
+  triggers:
+    - authenticationRef:
+        name: keda-trigger-auth-redis-secret
+      metadata:
+        address: '10.130.0.24:17750'
+        listLength: '5'
+        listName: mylist
+      type: redis

@@ -25,9 +25,9 @@ Resources:
 - ScaledJob --> redis-scaledjob
 Steps:
 - oc login
--  oc project keda
--   oc run redis-cli --rm -i --tty --image redis -- bash
--     edis-cli -h 10.130.0.24 -p 17750 -a uZTbwJVn LPUSH mylist item1 item2 item3 item4 item5
+- oc project keda
+- oc run redis-cli --rm -i --tty --image redis -- bash
+- redis-cli -h 10.130.0.24 -p 17750 -a uZTbwJVn LPUSH mylist item1 item2 item3 item4 item5
 You should see the scaledJob has been triggered.
 
 Useful commands

@@ -11,7 +11,7 @@ Installation
     - Console login info, secret rec
 - add redis secret --> oc apply -f redis-password.yaml
 - add trigger auth --> oc apply -f keda-trigger-auth-redis-secret.yaml (tried to plain text password not working)
-- add keda config --> redis-scaleobject.yaml (leverage HorizontalPodAutoscalers, auto gen)
+- add keda config --> redis-scaledobject.yaml (leverage HorizontalPodAutoscalers, auto gen)
 
 Redis consumer
 - sudo podman build -t takelung/redis-counter:latest .

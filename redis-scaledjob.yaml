@@ -2,7 +2,6 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledJob
 metadata:
   name: redis-scaledjob
-  namespace: keda
 spec:
   failedJobsHistoryLimit: 5
   jobTargetRef:

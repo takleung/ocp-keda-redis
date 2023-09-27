@@ -2,7 +2,6 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: redis-scaledobject
-  namespace: keda
 spec:
   cooldownPeriod: 30
   maxReplicaCount: 100

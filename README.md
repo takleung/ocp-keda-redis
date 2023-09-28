@@ -52,9 +52,9 @@
 - redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD
 - set testkey testvalue
 - get testkey
-- redis-cli -h 10.130.0.24 -p 17750 -a $REDIS_PASSWORD LPUSH mylist item1 item2 item3 item4 item5
-- redis-cli -h 10.130.0.24 -p 17750 -a $REDIS_PASSWORD LLEN mylist
-- redis-cli -h 10.130.0.24 -p 17750 -a $REDIS_PASSWORD DEL mylist
+- redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD LPUSH mylist item1 item2 item3 item4 item5
+- redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD LLEN mylist
+- redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD DEL mylist
 - oc logs -f $(oc get pods -n keda | grep keda-operator | grep -v metrics-apiserver | awk '{print $1}') -n keda
 
 

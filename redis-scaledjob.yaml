@@ -3,7 +3,7 @@ kind: ScaledJob
 metadata:
   name: redis-scaledjob
 spec:
-  failedJobsHistoryLimit: 15
+  failedJobsHistoryLimit: 5
   jobTargetRef:
     template:
       metadata:
@@ -31,7 +31,7 @@ spec:
   pollingInterval: 30
   rollout: {}
   scalingStrategy: {}
-  successfulJobsHistoryLimit: 15
+  successfulJobsHistoryLimit: 5
   triggers:
     - authenticationRef:
         name: keda-trigger-auth-redis-secret

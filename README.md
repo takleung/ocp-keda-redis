@@ -1,4 +1,3 @@
-# ocp-keda-redis
 # Installation - KEDA(helm install) + Redis cluster(installed)
 - KEDA_INSTANCE="keda"
 - REDIS_CLUSTER_PROJECT="redis-enterprise"
@@ -23,6 +22,7 @@
  2. sudo podman tag takleung/redis-counter:latest docker.io/takleung/redis-counter:latest
  3. sudo podman push docker.io/takleung/redis-counter:latest
 
+# Installation - New project, secret, triggerAuth, scaledjob
 - REDIS_CLUSTER_PROJECT="redis-enterprise"
 - REDIS_CLUSTER_IP=$(oc get service redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.spec.clusterIP}')
 - REDIS_PASSWORD=$(oc get secret redb-redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.data.password}' | base64 --decode)

@@ -1,4 +1,4 @@
-# Installation - KEDA(helm install) + Redis cluster(installed)
+# (Optonal) Installation - KEDA(helm install) + Redis cluster(installed)
 - KEDA_INSTANCE="keda"
 - REDIS_CLUSTER_PROJECT="redis-enterprise"
 - REDIS_PASSWORD=$(oc get secret redb-redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.data.password}' | base64 --decode)
@@ -9,7 +9,7 @@
 - helm install ${KEDA_INSTANCE} kedacore/keda --namespace ${KEDA_INSTANCE} --create-namespace
 - oc apply -f https://raw.githubusercontent.com/takleung/ocp-keda-redis/main/redis-enterprise-scc-v2.yaml
 
-# **** redis operator install, check if redis cluster healthy ****
+# (Optonal) **** redis operator install, check if redis cluster healthy ****
  1. oc run redis-cli --rm -i --tty --image redis --env REDIS_PASSWORD=$REDIS_PASSWORD --env REDIS_CLUSTER_IP=$REDIS_CLUSTER_IP -- bash
  2. redis-cli -h $REDIS_CLUSTER_PROJECT -p 17750 -a $REDIS_PASSWORD
  3. set testkey testvalue
@@ -17,7 +17,7 @@
  5. return "testvalue"
  6. exit twice end of redis-cli
 
-# Installation - example user workload deployment - Redis consumer
+# (Optonal) Installation - example user workload deployment - Redis consumer
  1. sudo podman build -t takelung/redis-counter:latest .
  2. sudo podman tag takleung/redis-counter:latest docker.io/takleung/redis-counter:latest
  3. sudo podman push docker.io/takleung/redis-counter:latest

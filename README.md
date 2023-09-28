@@ -37,10 +37,10 @@
 
 # Testing procedure: keda ScaledJob components Resources:
 - oc run redis-cli --rm -i --tty --image redis --env REDIS_PASSWORD=$REDIS_PASSWORD --env REDIS_CLUSTER_IP=$REDIS_CLUSTER_IP -- bash 
-for i in {1..5}
-do
-   redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD LPUSH mylist item1 item2 item3 item4 item5
-done
+- for i in {1..5}
+   do
+      redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD LPUSH mylist item1 item2 item3 item4 item5
+   done
 <-- You should see the scaledJob has been triggered.
 
 # Clean up data

@@ -1,8 +1,12 @@
-# (Optonal) Installation - KEDA(helm install) + Redis cluster(installed)
+# Environment variables
 - KEDA_INSTANCE="keda"
 - REDIS_CLUSTER_PROJECT="redis-enterprise"
+- REDIS_CLUSTER_IP=$(oc get service redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.spec.clusterIP}')
 - REDIS_PASSWORD=$(oc get secret redb-redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.data.password}' | base64 --decode)
 - OCP_URL="https://api.ocp-sno-aws-m7kck.sandbox2972.opentlc.com:6443"
+- CURRENT_PROJECT="keda07"
+
+# (Optonal) Installation - KEDA(helm install) + Redis cluster(installed)
 - oc login --token=$(oc whoami -t) --server=$OCP_URL
 - helm repo add kedacore https://kedacore.github.io/charts
 - helm repo update
@@ -23,12 +27,6 @@
  3. sudo podman push docker.io/takleung/redis-counter:latest
 
 # Installation - New project, secret, triggerAuth, scaledjob
-- REDIS_CLUSTER_PROJECT="redis-enterprise"
-- REDIS_CLUSTER_IP=$(oc get service redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.spec.clusterIP}')
-- REDIS_PASSWORD=$(oc get secret redb-redb -n $REDIS_CLUSTER_PROJECT -o jsonpath='{.data.password}' | base64 --decode)
-- CURRENT_PROJECT="keda07"
-- OCP_URL="https://api.ocp-sno-aws-m7kck.sandbox2972.opentlc.com:6443"
-
 - oc login --token=$(oc whoami -t) --server=${OCP_URL}
 - oc new-project ${CURRENT_PROJECT}
 - oc create secret generic redis-password -n ${CURRENT_PROJECT} --type=Opaque --from-literal=REDIS_PASSWORD=$REDIS_PASSWORD

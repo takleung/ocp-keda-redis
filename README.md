@@ -41,8 +41,9 @@ for i in {1..5}
 do
    redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD LPUSH mylist item1 item2 item3 item4 item5
 done
+<-- You should see the scaledJob has been triggered.
 
-# You should see the scaledJob has been triggered.
+# Clean up data
 - redis-cli -h $REDIS_CLUSTER_IP -p 17750 -a $REDIS_PASSWORD DEL mylist
 - oc delete project $CURRENT_PROJECT
 

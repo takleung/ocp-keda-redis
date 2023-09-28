@@ -11,8 +11,8 @@
 - oc apply -f https://raw.githubusercontent.com/takleung/ocp-keda-redis/main/redis-enterprise-scc-v2.yaml
 
 # **** redis operator install, check if redis cluster healthy ****
- 1. oc run redis-cli --rm -i --tty --image redis -- bash
- 2. redis-cli -h 10.130.0.24 -p 17750 -a ${REDIS_PASSWORD}
+ 1. oc run redis-cli --rm -i --tty --image redis --env REDIS_PASSWORD=$REDIS_PASSWORD --env REDIS_CLUSTER_IP=$REDIS_CLUSTER_IP -- bash
+ 2. redis-cli -h $REDIS_CLUSTER_PROJECT -p 17750 -a $REDIS_PASSWORD
  3. set testkey testvalue
  4. get testkey
  5. return "testvalue"
